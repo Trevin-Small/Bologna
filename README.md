@@ -32,10 +32,11 @@ This project is (for fun!) completely useless. I took the existing BrainFuck pro
 ## FOR LOOP
 ```{}x``` Repeats code inside the indices ```x``` times, or ```{}#5``` repeats as many times as the value at memory index 5.
 
-#### GOAL
+<br>
+
+# GOAL
 Add a few more features to the language, then create tic tac toe with BrainFuck Extended.
-<br>
-<br>
+
 <br>
 
 # If anyone is interested in playing around with this language:
