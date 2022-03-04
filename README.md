@@ -1,5 +1,9 @@
 # BrainFuck Extended
-## SHORTHAND SYNTAX 
+This project is (for fun!) completely useless. I took the existing BrainFuck programming language, and wrote a new interpreter in C, which adds lots of new commands, which can be seen below.
+<br>
+<br>
+
+## SHORTHAND SYNTAX OF EXISTING (AND NEW) OPERATORS
 ```
 >>> == >3
 ++ == +2
