@@ -12,8 +12,6 @@ This project is (for fun!) completely useless. I took the existing BrainFuck pro
 ---- == -4
 <<<<< == <5
 ```
-## FOR LOOP
-```{}x``` Repeats code inside the indices ```x``` times.  
 
 ## MULTIPLICATION
 ```*x``` Multiplies current pointer value by ```x``` 
@@ -30,6 +28,9 @@ This project is (for fun!) completely useless. I took the existing BrainFuck pro
 ```#x``` Every case from above applies, but rather than referencing the current pointer, it references pointer at memory index ```x```
 ```*#4``` Multiplies the current pointer value by the value at memory index 4
 ```#6.``` Print the value at memory index 6
+
+## FOR LOOP
+```{}x``` Repeats code inside the indices ```x``` times, or ```{}#5``` repeats as many times as the value at memory index 5.
 
 The goal is to add a few more features to the language, then to create tic tac toe in the terminal with pure BrainFuck Extended.
 <br>
