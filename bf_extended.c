@@ -14,6 +14,7 @@
 #define BF_LOOP_END ']'
 
 // Extended commands
+#define ZERO '_'
 #define MULTIPLY '*'
 #define DIVIDE '/'
 #define PTR_VALUE '#'
@@ -142,6 +143,9 @@ int run(char command) {
       } else {
         ptr--;
       }
+      if (mem > ptr) {
+        ptr = mem;
+      }
       break;
 
     case PTR_RIGHT:
@@ -149,6 +153,9 @@ int run(char command) {
         ptr += value;
       } else {
         ptr++;
+      }
+      if (ptr - mem > MEM_SIZE) {
+        ptr = mem + MEM_SIZE - 1;
       }
       break;
 
@@ -169,12 +176,17 @@ int run(char command) {
       break;
 
     case CHAR_IN:
-      printf("Input a character: ");
       scanf(" %c", ptr);
       break;
 
     case CHAR_OUT:
-      printf("%c", *ptr);
+      if (read_args(&value) == 1) {
+        for (int i = 0; i < value; i++) {
+          printf("%c", *ptr);
+        }
+      } else {
+        printf("%c", *ptr);
+      }
       break;
 
     case BF_LOOP_START:
@@ -216,6 +228,9 @@ int run(char command) {
     /*     End of vanilla brainfuck commands, and start of extended commands.    */
     /* ------------------------------------------------------------------------- */
 
+    case ZERO:
+      (*ptr) = 0;
+      break;
     case MULTIPLY:
       if (read_args(&value) == 1) {
         (*ptr)*= value;
