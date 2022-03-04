@@ -149,7 +149,7 @@ int modify_by_index(int * value) {
 
     if (in == CHAR_OUT) {
 
-      printf("%c", (char) &value);
+      printf("%c", *value);
       return 0;
 
     } else {

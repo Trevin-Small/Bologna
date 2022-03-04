@@ -1,5 +1,7 @@
 # BrainFuck Extended
 This project is (for fun!) completely useless. I took the existing BrainFuck programming language, and wrote a new interpreter in C, which adds lots of new commands, which can be seen below.
+#### Note:
+This language is now so different from BrainFuck that I'm not sure it counts as a "derivative" anymore, although the interpreter can still run standard BrainFuck so maybe it counts?
 <br>
 <br>
 <br>
