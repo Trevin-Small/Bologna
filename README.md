@@ -16,6 +16,9 @@ This project is (for fun!) completely useless. I took the existing BrainFuck pro
 ## ZERO
 ```_``` Sets the value of the current pointer to zero
 
+## ABSOLUTE SHIFT
+```:x``` Shifts the pointer to index ```x```.
+
 ## MULTIPLICATION
 ```*x``` Multiplies current pointer value by ```x``` 
 
@@ -49,6 +52,8 @@ EX: #1 = mem[1] = some_value
 .#91 (Print current pointer #91 times)
 
 #12. (Print the value of #12)
+
+:#7 (Move pointer to index matching the value at memory index 7)
 
 *#2 (Multiply current pointer value by #2)
 

@@ -15,6 +15,7 @@
 
 // Extended commands
 #define ZERO               '_'
+#define ABSOLUTE_SHIFT     ':'
 #define MULTIPLY           '*'
 #define DIVIDE             '/'
 #define PTR_VALUE          '#'
@@ -187,7 +188,7 @@ int modify_by_index(int * value) {
             mem[index] /= *value;
           } else {
             printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
-            printf("Expected integer value after '/' (division) operator.\n\n");
+            printf("Expected integer value after '/' (integer division) operator.\n\n");
             return EOF;
           }
           return 0;
@@ -310,18 +311,16 @@ int run(char command) {
       (*ptr) = 0;
       break;
 
-    /*
     case ABSOLUTE_SHIFT:
       if (read_args(&value) == 1) {
         ptr = mem + value;
       } else {
         printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
-        printf("Expected integer value after '/' (multiplication) operator.\n\n");
+        printf("Expected integer value after ':' (Absolute shift) operator.\n\n");
         return EOF;
       }
 
       break;
-    */
 
     case MULTIPLY:
       if (read_args(&value) == 1) {

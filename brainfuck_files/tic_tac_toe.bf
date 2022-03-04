@@ -8,13 +8,12 @@ _____________________________________________
 
 ================================================================
 
-Note: Leave 0 Empty! This is the default memory block we use to print.
+Note; Leave 0 Empty! This is the default memory block we use to print.
 
 Initialize Index memory 1_9 to ' ' (Space)
 To hold the vals of (X | O) cells in the game
 
 { #10+ >+#10 +48 .}9 <9
-
 
 Initialize Index 10 to \n (linebreak)
 >10 _ +10<10
