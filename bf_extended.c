@@ -26,8 +26,8 @@
 int for_loop();
 int run(char);
 
-unsigned int mem[MEM_SIZE] = {0};
-unsigned int * ptr;
+int mem[MEM_SIZE] = {0};
+int * ptr;
 FILE * fp;
 
 /*
@@ -134,75 +134,10 @@ int for_loop() {
 
 
 
-int modify_by_index(int * value) {
-
-  int index = 0;
-  long int pre_int_arg = ftell(fp);
-
-  fseek(fp, -1, SEEK_CUR);
-
-  if (read_args(value) == 1) {
-
-    fseek(fp, pre_int_arg, SEEK_SET);
-    index = fscanf(fp, "%d", &index);
-    char in = fgetc(fp);
-
-    if (in == CHAR_OUT) {
-
-      printf("%c", *value);
-      return 0;
-
-    } else {
-
-      printf("Index: %d\n", index);
-      switch(in) {
-
-        case INCREMENT:
-          if (read_args(value) == 1) {
-            mem[index] += *value;
-          } else {
-            mem[index]++;
-          }
-          return 0;
-
-        case DECREMENT:
-          if (read_args(value) == 1) {
-            mem[index] -= *value;
-          } else {
-            mem[index]--;
-          }
-          return 0;
-
-        case MULTIPLY:
-          if (read_args(value) == 1) {
-            mem[index] *= *value;
-          } else {
-            printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
-            printf("Expected integer value after '*' (multiplication) operator.\n\n");
-            return EOF;
-          }
-          return 0;
-
-        case DIVIDE:
-          if (read_args(value) == 1) {
-            mem[index] /= *value;
-          } else {
-            printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
-            printf("Expected integer value after '/' (integer division) operator.\n\n");
-            return EOF;
-          }
-          return 0;
-
-      }
-    }
-  }
-
-  printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
-  printf("Using '#' (pointer value) operator is only permitted after commands that take integer arguments (e.g. +x, -x, <x, >x, *x, /x, {}x) OR with the '.' (CHAR_OUT) operator directly afterwards. (e.g. #. , #2.) \n\n");
-  return 0;
-}
-
-
+/*
+ * Main execution function. Takes in a command and runs
+ * the associated processing with that given command.
+ */
 
 int run(char command) {
 
@@ -343,7 +278,18 @@ int run(char command) {
       break;
 
     case PTR_VALUE:
-      return modify_by_index(&value);
+      fseek(fp, -1, SEEK_CUR);
+      if (read_args(&value) == 1) {
+        char in = fgetc(fp);
+        if (in == CHAR_OUT) {
+          printf("%c", value);
+          break;
+        }
+      }
+
+      printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
+      printf("Using '#' (pointer value) operator is only permitted after commands that take integer arguments (e.g. +x, -x, <x, >x, *x, /x, {}x) OR with the '.' (CHAR_OUT) operator directly afterwards. (e.g. #. , #2.) \n\n");
+      return EOF;
 
     case FOR_LOOP_START:
       break;

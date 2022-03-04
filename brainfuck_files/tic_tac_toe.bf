@@ -13,23 +13,24 @@ Note; Leave 0 Empty! This is the default memory block we use to print.
 Initialize Index memory 1_9 to ' ' (Space)
 To hold the vals of (X | O) cells in the game
 
->{ :10 + :#10 +#10 +48 }9 :0
+>{ :10 + :#10 +#10 +48 }9
 
 Initialize Index 10 to \n (linebreak)
-:10 _ +10 . :0
+:10 _ +10 .
 
 Initialize Index 11 to ' ' (Space)
-:11 _ +32 :11
+:11 +32
 
 Initialize Index 12 to '|'
-:12 _ +124 :12
+:12 +124
 
 Initialize Index 13 to 'X'
-:13 _ +88 :13
+:13 +88
 
 Initialize Index 14 to 'O'
-:14 _ +79 :14
+:14 +79
 
+:0
 
 Start Game Loop
 ================================================================
@@ -140,7 +141,7 @@ Start Game Loop
   +80. _ +105. _ +99. _ +107. _ +32. _ +97. _ +32. _ +67. _ +101. _ +108. _ +108. _ +32. _ +49. _ +32. _ +45. _ +32. _ +57. _ +41. _ #11.
 
   Character input
-  :50 _ , :#50 _ +79 :0 #10.
+  :50 _ , :#50 _ +#14 :0 #10.
 
   #10.
 

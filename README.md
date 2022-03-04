@@ -72,6 +72,13 @@ EX: #1 = mem[1] = some_value
 
 # GOAL
 Add a few more features to the language, then create tic tac toe with BrainFuck Extended.
+<br>
+
+# TODO
+- Add support for nested for loops (They currently dont work in the slightest LOL)
+- Add ```?{}``` Operator which checks if a value is greater than zero and runs the code inside the braces if so.
+<br>
+
 
 <br>
 
