@@ -4,30 +4,30 @@
 #define MEM_SIZE 30000
 
 // Vanilla Brainfucks commands
-#define PTR_LEFT '<'
-#define PTR_RIGHT '>'
-#define PTR_INCREMENT '+'
-#define PTR_DECREMENT '-'
-#define CHAR_IN ','
-#define CHAR_OUT '.'
-#define BF_LOOP_START '['
-#define BF_LOOP_END ']'
+#define PTR_LEFT_SHIFT     '<'
+#define PTR_RIGHT_SHIFT    '>'
+#define INCREMENT      '+'
+#define DECREMENT      '-'
+#define CHAR_IN            ','
+#define CHAR_OUT           '.'
+#define BRN_FCK_LOOP_START '['
+#define BRN_FCK_LOOP_END   ']'
 
 // Extended commands
-#define ZERO '_'
-#define MULTIPLY '*'
-#define DIVIDE '/'
-#define PTR_VALUE '#'
-#define FOR_LOOP_START '{'
-#define FOR_LOOP_END '}'
-#define EXIT '~'
+#define ZERO               '_'
+#define MULTIPLY           '*'
+#define DIVIDE             '/'
+#define PTR_VALUE          '#'
+#define FOR_LOOP_START     '{'
+#define FOR_LOOP_END       '}'
+#define EXIT               '~'
 
 int for_loop();
 int run(char);
 
-char mem[MEM_SIZE] = {0};
+unsigned int mem[MEM_SIZE] = {0};
+unsigned int * ptr;
 FILE * fp;
-char * ptr;
 
 /*
  * Reads arguments passed to commands that take them.
@@ -131,35 +131,113 @@ int for_loop() {
   return 0;
 } /* for_loop() */
 
+
+
+int modify_by_index(int * value) {
+
+  int index = 0;
+  long int pre_int_arg = ftell(fp);
+
+  fseek(fp, -1, SEEK_CUR);
+
+  if (read_args(value) == 1) {
+
+    fseek(fp, pre_int_arg, SEEK_SET);
+    index = fscanf(fp, "%d", &index);
+    char in = fgetc(fp);
+
+    if (in == CHAR_OUT) {
+
+      printf("%c", (char) &value);
+      return 0;
+
+    } else {
+
+      printf("Index: %d\n", index);
+      switch(in) {
+
+        case INCREMENT:
+          if (read_args(value) == 1) {
+            mem[index] += *value;
+          } else {
+            mem[index]++;
+          }
+          return 0;
+
+        case DECREMENT:
+          if (read_args(value) == 1) {
+            mem[index] -= *value;
+          } else {
+            mem[index]--;
+          }
+          return 0;
+
+        case MULTIPLY:
+          if (read_args(value) == 1) {
+            mem[index] *= *value;
+          } else {
+            printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
+            printf("Expected integer value after '*' (multiplication) operator.\n\n");
+            return EOF;
+          }
+          return 0;
+
+        case DIVIDE:
+          if (read_args(value) == 1) {
+            mem[index] /= *value;
+          } else {
+            printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
+            printf("Expected integer value after '/' (division) operator.\n\n");
+            return EOF;
+          }
+          return 0;
+
+      }
+    }
+  }
+
+  printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
+  printf("Using '#' (pointer value) operator is only permitted after commands that take integer arguments (e.g. +x, -x, <x, >x, *x, /x, {}x) OR with the '.' (CHAR_OUT) operator directly afterwards. (e.g. #. , #2.) \n\n");
+  return 0;
+}
+
+
+
 int run(char command) {
 
   int value = 0;
 
   switch(command) {
 
-    case PTR_LEFT:
+    case PTR_LEFT_SHIFT:
       if (read_args(&value) == 1) {
-        ptr -= value;
+        if (ptr - value < mem) {
+          ptr = mem;
+        } else {
+          ptr -= value;
+        }
       } else {
-        ptr--;
-      }
-      if (mem > ptr) {
-        ptr = mem;
+        if (ptr - 1 > mem) {
+          ptr--;
+        }
       }
       break;
 
-    case PTR_RIGHT:
+    case PTR_RIGHT_SHIFT:
       if (read_args(&value) == 1) {
-        ptr += value;
+        if (ptr + value > mem + MEM_SIZE) {
+          ptr = mem + MEM_SIZE - 1;
+        } else {
+          ptr += value;
+        }
       } else {
-        ptr++;
-      }
-      if (ptr - mem > MEM_SIZE) {
-        ptr = mem + MEM_SIZE - 1;
+        if (ptr + 1 < mem + MEM_SIZE) {
+          ptr++;
+        }
       }
       break;
 
-    case PTR_INCREMENT:
+    case INCREMENT:
       if (read_args(&value) == 1) {
         (*ptr)+= value;
       } else {
@@ -167,7 +245,7 @@ int run(char command) {
       }
       break;
 
-    case PTR_DECREMENT:
+    case DECREMENT:
       if (read_args(&value) == 1) {
         (*ptr)-= value;
       } else {
@@ -176,7 +254,7 @@ int run(char command) {
       break;
 
     case CHAR_IN:
-      scanf(" %c", ptr);
+      scanf(" %d", ptr);
       break;
 
     case CHAR_OUT:
@@ -189,16 +267,16 @@ int run(char command) {
       }
       break;
 
-    case BF_LOOP_START:
+    case BRN_FCK_LOOP_START:
       if (*ptr == 0) {
         int start_counter = 0;
         do {
           char start_in = fgetc(fp);
-          if (start_in == BF_LOOP_START) {
+          if (start_in == BRN_FCK_LOOP_START) {
             start_counter++;
-          } else if ((start_in == BF_LOOP_END) && (start_counter > 0)) {
+          } else if ((start_in == BRN_FCK_LOOP_END) && (start_counter > 0)) {
             start_counter--;
-          } else if ((start_in == BF_LOOP_END) && (start_counter == 0)) {
+          } else if ((start_in == BRN_FCK_LOOP_END) && (start_counter == 0)) {
             fseek(fp, 1, SEEK_CUR);
             break;
           }
@@ -206,17 +284,17 @@ int run(char command) {
       }
       break;
 
-    case BF_LOOP_END:
+    case BRN_FCK_LOOP_END:
       if (*ptr != 0) {
         int close_counter = 0;
         do {
           fseek(fp, -2, SEEK_CUR);
           char end_in = fgetc(fp);
-          if (end_in == BF_LOOP_END) {
+          if (end_in == BRN_FCK_LOOP_END) {
             close_counter++;
-          } else if ((end_in == BF_LOOP_START) && (close_counter > 0)) {
+          } else if ((end_in == BRN_FCK_LOOP_START) && (close_counter > 0)) {
             close_counter--;
-          } else if ((end_in == BF_LOOP_START) && (close_counter == 0)) {
+          } else if ((end_in == BRN_FCK_LOOP_START) && (close_counter == 0)) {
             break;
           }
         } while(1 == 1);
@@ -231,6 +309,20 @@ int run(char command) {
     case ZERO:
       (*ptr) = 0;
       break;
+
+    /*
+    case ABSOLUTE_SHIFT:
+      if (read_args(&value) == 1) {
+        ptr = mem + value;
+      } else {
+        printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
+        printf("Expected integer value after '/' (multiplication) operator.\n\n");
+        return EOF;
+      }
+
+      break;
+    */
+
     case MULTIPLY:
       if (read_args(&value) == 1) {
         (*ptr)*= value;
@@ -252,19 +344,7 @@ int run(char command) {
       break;
 
     case PTR_VALUE:
-      fseek(fp, -1, SEEK_CUR);
-      if (read_args(&value) == 1) {
-        char in = fgetc(fp);
-        if (in == CHAR_OUT) {
-          printf("%c", value);
-          break;
-        }
-      }
-
-      printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
-      printf("Using '#' (pointer value) operator is only permitted after commands that take integer arguments (e.g. +x, -x, <x, >x, *x, /x, {}x) OR with the '.' (CHAR_OUT) operator directly afterwards. (e.g. #. , #2.) \n\n");
-
-      return EOF;
+      return modify_by_index(&value);
 
     case FOR_LOOP_START:
       break;
