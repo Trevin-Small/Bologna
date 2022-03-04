@@ -4,7 +4,7 @@
 
 - As a derivative of the BrainFuck programming language, it retains the original 8 commands from BrainFuck (```+-<>[],.```)
 
-## How does it compare?
+## How does it compare to BrainFuck?
 - Like BrainFuck, Bologna uses a single 30,000 Byte array for the entirety of the program.
 - Memory is stored as signed 8-bit integers, unlike many implementations of BF which use unsigned characters.
 - Memory indexing, for loops, and rudimentary logic are a few of Bologna's features.
@@ -45,6 +45,16 @@
 <<<<< == <5
 ```
 
+# Pointer Movement
+
+## LEFT SHIFT
+
+## RIGHT SHIFT
+
+# ABSOLUTE SHIFT
+
+# Numerical Operators
+
 ## ZERO
 ```_``` Sets the value of the current pointer to zero
 
@@ -57,15 +67,19 @@
 ## DIVISION
 ```/x``` Divides the current pointer value by ```x```
 
-## CURRENT POINTER VALUE
-```#``` Gets value of current pointer (will be treated as if an integer was in the code)
-```{}#``` A for loop that repeats as many times as the value of the current pointer
-```+#``` Adds current pointer value to the current pointer value
+# Loops
 
 ## FOR LOOP
 ```{}x``` Repeats code inside the indices ```x``` times, or ```{}#5``` repeats as many times as the value at memory index 5.
 
-## MEMORY INDEXING
+# MEMORY INDEXING
+
+## CURRENT INDEX OPERATOR
+```#``` Gets value of current pointer (will be treated as if an integer was in the code)
+```{}#``` A for loop that repeats as many times as the value of the current pointer
+```+#``` Adds current pointer value to the current pointer value
+
+## MEMORY INDEX OPERATOR
 ```#x``` Every case from above applies, but rather than referencing the current pointer, it references pointer at memory index ```x```
 ```brainfuck
 Memory is an array of signed 8-bit integers
