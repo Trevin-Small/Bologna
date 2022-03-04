@@ -29,8 +29,34 @@ This project is (for fun!) completely useless. I took the existing BrainFuck pro
 
 ## MEMORY INDEXING
 ```#x``` Every case from above applies, but rather than referencing the current pointer, it references pointer at memory index ```x```
-```*#4``` Multiplies the current pointer value by the value at memory index 4
-```#6.``` Print the value at memory index 6
+```
+Remember: In BrainFuck, memory is an array
+-----------------------------------------
+#x Represents the value at memory index x
+
+EX: #1 = mem[1] = some_value
+-----------------------------------------
+
+
+>#1 (Move pointer right #1 times)
+
+<#15 (Move pointer left #15 times)
+
++#4 (Add #4 to the current pointer)
+
+-#6 (Subtract #6 from the current pointer)
+
+.#91 (Print current pointer #91 times)
+
+#12. (Print the value of #12)
+
+*#2 (Multiply current pointer value by #2)
+
+/#8 (Divide current pointer value by #8)
+
+{}#3 (For loop repeats #3 times)
+```
+
 
 ## FOR LOOP
 ```{}x``` Repeats code inside the indices ```x``` times, or ```{}#5``` repeats as many times as the value at memory index 5.
