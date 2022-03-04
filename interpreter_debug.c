@@ -44,17 +44,8 @@ char * ptr;
  * '-#7' Takes the current pointer value and subtracts the value at mem[index 7]
  */
 int read_args(int * value) {
-
   char char_in = fgetc(fp);
-
-  if (char_in >= '0' && char_in <= '9') {
-
-    fseek(fp, -1, SEEK_CUR);
-    int num_in = fscanf(fp, "%d", value);
-    if (num_in == 1) {return 1;}
-
-  } else if (char_in == PTR_VALUE) {
-
+  if (char_in == PTR_VALUE) {
     int integer_in = 0;
     int num_in = fscanf(fp, "%d\n", &integer_in);
 
@@ -65,9 +56,13 @@ int read_args(int * value) {
     }
 
     return 1;
-  }
 
-  fseek(fp, -1, SEEK_CUR);
+  } else if (char_in >= '0' && char_in <= '9') {
+    fseek(fp, -1, SEEK_CUR);
+    int num_in = fscanf(fp, "%d", value);
+    printf("Integer in: %d\n", *value);
+    if (num_in == 1) {return 1;}
+  }
   return 0;
 } /* get_ptr_value() */
 
@@ -85,12 +80,11 @@ int read_args(int * value) {
  */
 
 int for_loop() {
-  const long int for_end_index = ftell(fp);
-
+  long int for_end_index = ftell(fp);
   int num_repititions = 0;
   int num_in = read_args(&num_repititions);
 
-  const long int final_position = ftell(fp);
+  long int size_of_repititions = ftell(fp) - for_end_index;
 
   if (num_in != 1) {
     printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
@@ -125,7 +119,7 @@ int for_loop() {
     } while(next != FOR_LOOP_END);
   }
 
-  fseek(fp, final_position, SEEK_SET);
+  fseek(fp, 1 + size_of_repititions, SEEK_CUR);
 
   return 0;
 } /* for_loop() */
@@ -138,32 +132,40 @@ int run(char command) {
 
     case PTR_LEFT:
       if (read_args(&value) == 1) {
+        printf("Moving ptr left %d\n", value);
         ptr -= value;
       } else {
+        printf("Moving ptr left 1");
         ptr--;
       }
       break;
 
     case PTR_RIGHT:
       if (read_args(&value) == 1) {
+        printf("Moving ptr right %d\n", value);
         ptr += value;
       } else {
+        printf("Moving ptr right 1");
         ptr++;
       }
       break;
 
     case PTR_INCREMENT:
       if (read_args(&value) == 1) {
+        printf("Adding %d to current pointer value\n", value);
         (*ptr)+= value;
       } else {
+        printf("Adding 1 to current pointer value\n");
         (*ptr)++;
       }
       break;
 
     case PTR_DECREMENT:
       if (read_args(&value) == 1) {
+        printf("Subtracting %d from current pointer value\n", value);
         (*ptr)-= value;
       } else {
+        printf("Subtracting 1 to current pointer value\n");
         (*ptr)--;
       }
       break;
@@ -174,10 +176,12 @@ int run(char command) {
       break;
 
     case CHAR_OUT:
+      printf("Printing Character:\n");
       printf("%c", *ptr);
       break;
 
     case BF_LOOP_START:
+      printf("[] Loop Entering...\n");
       if (*ptr == 0) {
         int start_counter = 0;
         do {
@@ -195,6 +199,7 @@ int run(char command) {
       break;
 
     case BF_LOOP_END:
+      printf("[] Loop End reach...\n");
       if (*ptr != 0) {
         int close_counter = 0;
         do {
@@ -218,6 +223,7 @@ int run(char command) {
 
     case MULTIPLY:
       if (read_args(&value) == 1) {
+        printf("Multiplying current pointer by %d\n", value);
         (*ptr)*= value;
       } else {
         printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
@@ -228,6 +234,7 @@ int run(char command) {
 
     case DIVIDE:
       if (read_args(&value) == 1) {
+        printf("Dividing current pointer by %d\n", value);
         (*ptr)/= value;
       } else {
         printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
@@ -237,6 +244,7 @@ int run(char command) {
       break;
 
     case PTR_VALUE:
+      printf("Entering print pointer for value: %d\n", value);
       fseek(fp, -1, SEEK_CUR);
       if (read_args(&value) == 1) {
         char in = fgetc(fp);
