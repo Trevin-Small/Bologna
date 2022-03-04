@@ -6,7 +6,7 @@ This project is (for fun!) completely useless. I took the existing BrainFuck pro
 # Added Features
 
 ## SHORTHAND SYNTAX OF EXISTING (AND NEW) OPERATORS
-```
+```brainfuck
 >>> == >3
 ++ == +2
 ---- == -4
@@ -29,7 +29,7 @@ This project is (for fun!) completely useless. I took the existing BrainFuck pro
 
 ## MEMORY INDEXING
 ```#x``` Every case from above applies, but rather than referencing the current pointer, it references pointer at memory index ```x```
-```
+```brainfuck
 Remember: In BrainFuck, memory is an array
 -----------------------------------------
 #x Represents the value at memory index x
