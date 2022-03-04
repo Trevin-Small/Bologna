@@ -2,7 +2,6 @@
 
 // Memory size of Brainfuck programs
 #define MEM_SIZE 30000
-#define TEN_KILOBYTE 10000
 
 // All of Brainfucks commands.... only 8 lines LOL
 #define PTR_LEFT '<'
