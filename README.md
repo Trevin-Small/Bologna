@@ -1,11 +1,12 @@
 # Bologna
 **Bologna is an esoteric interpreted programming language**
-- A derivative of the BrainFuck programming language, it retains it's original 8 commands
-- Intended to be minimalistic yet (somewhat?) useable, Bologna adds additional features to the language
+- Intended to be minimalistic yet (somewhat?) useable, Bologna is an un-intuitive, ridiculous language.
+
+- As a derivative of the BrainFuck programming language, it retains the original 8 commands from BrainFuck (```+-<>[],.```)
 
 ## How does it compare?
 - Like BrainFuck, Bologna uses a single 30,000 Byte array for the entirety of the program.
-- Memory is stored as signed 8-bit integers, unlike many implementations which use unsigned characters.
+- Memory is stored as signed 8-bit integers, unlike many implementations of BF which use unsigned characters.
 - Memory indexing, for loops, and rudimentary logic are a few of Bologna's features.
 
 # Cheat Sheet
@@ -28,10 +29,13 @@
 | ```#x```               |      |      |
 |                  |      |      |
 |                  |      |      |
-|                  |      |      |
-|                  |      |      |
+|  **Other**                |      |      |
+|   ```~```           |      |      |
+|   ```"```           |      |      |
+|            |      |      |
 
-# Command Explanations 
+
+# Command Explanations
 
 ## SHORTHAND SYNTAX OF EXISTING (AND NEW) OPERATORS
 ```brainfuck
@@ -54,19 +58,22 @@
 ```/x``` Divides the current pointer value by ```x```
 
 ## CURRENT POINTER VALUE
-```#``` Gets value of current pointer (will be treated as if an integer was in the code)  
+```#``` Gets value of current pointer (will be treated as if an integer was in the code)
 ```{}#``` A for loop that repeats as many times as the value of the current pointer
 ```+#``` Adds current pointer value to the current pointer value
+
+## FOR LOOP
+```{}x``` Repeats code inside the indices ```x``` times, or ```{}#5``` repeats as many times as the value at memory index 5.
 
 ## MEMORY INDEXING
 ```#x``` Every case from above applies, but rather than referencing the current pointer, it references pointer at memory index ```x```
 ```brainfuck
-Remember: In BrainFuck, memory is an array
------------------------------------------
+Memory is an array of signed 8-bit integers
+-------------------------------------------
 #x Represents the value at memory index x
 
 EX: #1 = mem[1] = some_value
------------------------------------------
+-------------------------------------------
 
 
 >#1 (Move pointer right #1 times)
@@ -90,18 +97,10 @@ EX: #1 = mem[1] = some_value
 {}#3 (For loop repeats #3 times)
 ```
 
-
-## FOR LOOP
-```{}x``` Repeats code inside the indices ```x``` times, or ```{}#5``` repeats as many times as the value at memory index 5.
-
-# GOAL
-Add a few more features to the language, then create tic tac toe with BrainFuck Extended.
-
 # TODO
 - Add support for nested for loops (They currently dont work in the slightest LOL)
 - Add ```?{}``` Operator which checks if a value is greater than zero and runs the code inside the braces if so.
-- Fix ```.``` bug. When a ```.``` is the last character in a file, the file never exits.
-
+- Fix ```.``` bug. In some cases, when a ```.``` is the last character in a file, program execution never terminates.
 
 <br>
 
@@ -112,3 +111,7 @@ Add a few more features to the language, then create tic tac toe with BrainFuck 
 ####  Compile this file with: ```gcc -o brainfuck bf_extended.c```
 
 #### And run a BrainFuck file with ```./brainfuck your_brainfuck_file.bf```
+
+# Examples
+- Inside of the ```/bologna``` folder, there are ```.bf (brainfuck)``` files. 
+- 

@@ -12,6 +12,7 @@
 #define BRN_FCK_LOOP_END   ']'
 
 // Extended commands
+#define COMMENT            '"'
 #define ZERO               '_'
 #define ABSOLUTE_SHIFT     ':'
 #define MULTIPLY           '*'

@@ -5,6 +5,7 @@
 int mem[MEM_SIZE] = {0};
 int * ptr;
 FILE * fp;
+int is_comment = 0;
 
 /*
  * Reads arguments passed to commands that take them.
@@ -118,7 +119,18 @@ int run(char command) {
 
   int value = 0;
 
+  if (is_comment == 1) {
+    if (command == COMMENT) {
+      is_comment = 0;
+    }
+    return 0;
+  }
+
   switch(command) {
+
+    case COMMENT:
+      is_comment = 1;
+      break;
 
     case PTR_LEFT_SHIFT:
       if (read_args(&value) == 1) {
