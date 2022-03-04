@@ -68,16 +68,13 @@ EX: #1 = mem[1] = some_value
 ## FOR LOOP
 ```{}x``` Repeats code inside the indices ```x``` times, or ```{}#5``` repeats as many times as the value at memory index 5.
 
-<br>
-
 # GOAL
 Add a few more features to the language, then create tic tac toe with BrainFuck Extended.
-<br>
 
 # TODO
 - Add support for nested for loops (They currently dont work in the slightest LOL)
 - Add ```?{}``` Operator which checks if a value is greater than zero and runs the code inside the braces if so.
-<br>
+- Fix ```.``` bug. When a ```.``` is the last character in a file, the file never exits.
 
 
 <br>

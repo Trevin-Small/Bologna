@@ -6,8 +6,8 @@
 // Vanilla Brainfucks commands
 #define PTR_LEFT_SHIFT     '<'
 #define PTR_RIGHT_SHIFT    '>'
-#define INCREMENT      '+'
-#define DECREMENT      '-'
+#define INCREMENT          '+'
+#define DECREMENT          '-'
 #define CHAR_IN            ','
 #define CHAR_OUT           '.'
 #define BRN_FCK_LOOP_START '['
@@ -71,8 +71,7 @@ int read_args(int * value) {
 
   fseek(fp, -1, SEEK_CUR);
   return 0;
-} /* get_ptr_value() */
-
+} /* read_args() */
 
 
 /*
@@ -301,6 +300,10 @@ int run(char command) {
     case EXIT:
     case EOF:
       return EOF;
+    default:
+      if ((feof(fp) > 0) || (ferror(fp) > 0)){
+        return EOF;
+      }
   }
 
   return 0;
