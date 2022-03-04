@@ -1,11 +1,37 @@
-# BrainFuck Extended
-This project is (for fun!) completely useless. I took the existing BrainFuck programming language, and wrote a new interpreter in C, which adds lots of new commands, which can be seen below.
-#### Note:
-This language is now so different from BrainFuck that I'm not sure it counts as a "derivative" anymore, although the interpreter can still run standard BrainFuck so maybe it counts?
-<br>
-<br>
-<br>
-# Added Features
+# Bologna
+**Bologna is an esoteric interpreted programming language**
+- A derivative of the BrainFuck programming language, it retains it's original 8 commands
+- Intended to be minimalistic yet (somewhat?) useable, Bologna adds additional features to the language
+
+## How does it compare?
+- Like BrainFuck, Bologna uses a single 30,000 Byte array for the entirety of the program.
+- Memory is stored as signed 8-bit integers, unlike many implementations which use unsigned characters.
+- Memory indexing, for loops, and rudimentary logic are a few of Bologna's features.
+
+# Cheat Sheet
+
+| Pointer Movement |      |      |
+|------------------|------|------|
+| ```>x```               |      |      |
+| ```<x```               |      |      |
+| ```:x```            |      |      |
+| **Value Operations** |      |      |
+| ```_```               |      |      |
+| ```+x```               |      |      |
+| ```-x```               |      |      |
+| ```*x```               |      |      |
+| ```/x```               |      |      |
+| **Loops**            |      |      |
+| ```[ ]```              |      |      |
+| ```{ }x```             |      |      |
+| **Memory Indexing**  |      |      |
+| ```#x```               |      |      |
+|                  |      |      |
+|                  |      |      |
+|                  |      |      |
+|                  |      |      |
+
+# Command Explanations 
 
 ## SHORTHAND SYNTAX OF EXISTING (AND NEW) OPERATORS
 ```brainfuck
