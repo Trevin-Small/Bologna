@@ -13,6 +13,9 @@ This project is (for fun!) completely useless. I took the existing BrainFuck pro
 <<<<< == <5
 ```
 
+## ZERO
+```_``` Sets the value of the current pointer to zero
+
 ## MULTIPLICATION
 ```*x``` Multiplies current pointer value by ```x``` 
 
