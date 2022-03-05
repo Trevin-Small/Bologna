@@ -11,23 +11,23 @@ That is, somewhat gross, and probably not your first choice.
 #### Basics
 - **No conventional variables.** All values are stored at some index in the 30,000 signed 8-bit integer array
 - **No functions**
-- **No data types**, as *everything* is stored as an _int_8t
-- **Interpreted** from your file *directly at runtime*
-- **So dumb its cool**
+- **No data types**, as __*everything*__ is stored as an unsigned 8 bit integer
+- **Interpreted** *directly* from your file at runtime
+- __**So dumb its cool**__
 
 # Cheat Sheet
 
-| Pointer Movement      |      |
+| Pointer Manipulation  |      |
 |-----------------------|------|
 | ```>x```              |Shift pointer right ```x``` times   |
 | ```<x```              |Shift pointer left ```x``` times   |
 | ```:x```              |Move pointer to memory index ```x```  |
-| **Value Operations**  |      |
+| **Numerical Operations**  |      |
 | ```_```               |Set the byte at the pointer to zero  |
 | ```+x```              |Add ```x``` to the byte at the pointer value   |
 | ```-x```              |Subtract ```x``` from the byte at the pointer  |
 | ```*x```              |Multiplty the byte at the pointer by ```x```   |
-| ```/x```              |Divide the byte at the pointer by ```x```   |
+| ```/x```              |Integer division of the byte at the pointer by ```x```   |
 | **Loops**             |      |
 | ```[```               |If the byte at the pointer is zero, jump past matching ```]```      |
 | ```]```               |If the byte at the pointer is non-zero, jump back to command after matching ```[``` |
@@ -42,20 +42,12 @@ That is, somewhat gross, and probably not your first choice.
 | ```<```               |Less than  |
 | ```=```               |Equal to |
 | ```!```               |Not equal to  |
-|  **Other**            |      |
+|  **Other OPERATORS**            |      |
 | ```~```               |End program execution  |
 | ```"comments"```      |Comment (By default text is ignored, but comments ignore commands)<br> Ex: "+-.<>" will not execute any of the operators)|
 |                       |      |
 
 # Command Explanations
-
-## SHORTHAND SYNTAX OF EXISTING (AND NEW) OPERATORS
-```brainfuck
->>> == >3
-++ == +2
----- == -4
-<<<<< == <5
-```
 
 # POINTER MANIPULATION
 Initially, the program pointer points to the beginning of the memory array at index 0.
@@ -68,7 +60,7 @@ Initially, the program pointer points to the beginning of the memory array at in
 ## Absolute Shift
 ```:x``` Shifts the pointer to memory index ```x```, regardless of its current position.
 
-# Numerical Operators
+# Numerical Operations
 
 ## Zero
 ```_``` Sets the value of the current pointer to zero
@@ -77,7 +69,7 @@ Initially, the program pointer points to the beginning of the memory array at in
 ```*x``` Multiplies current pointer value by ```x```
 
 ## Division
-```/x``` Divides the current pointer value by ```x```
+```/x``` Divides the current pointer value by ```x```. Note that all division is integer division.
 
 # LOOPS
 
@@ -172,6 +164,19 @@ A
 
 ```
 
+# OTHER OPERATORS
+
+## Exit
+```~``` Terminates program execution immediately.
+
+## Comments
+```" "``` Ignores commands inside of quotes. 
+- By default, characters which are not operators are already ignored
+- Comments allow usage of operator characters without execution
+```brainfuck
+"Add 6 to memory index 10 with :10 +6" <- The operators here will not be executed
+10: +6                                 <- The operators here will be executed
+```
 
 # TODO
 - Add Nested for loop support ```{ { }y }x```  (They currently dont work at all...)
