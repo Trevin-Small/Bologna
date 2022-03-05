@@ -244,14 +244,14 @@ int query() {
 
 
 /*
- * Main execution function. Takes in a command and runs
- * the associated processing with that given command.
+ * Executes input commands from a file.
+ * Takes in a char representing the command and runs
+ * the associated processing for the given command.
+ *
+ * Returns: 0 for successful command execution, EOF for error
  */
 
 int run(char command) {
-
-  // REMOVE WHEN DONE DEBUGGING ------------------------------------------------------->
-  //printf("Run char in: %c\n", command);
 
   if ((feof(fp) != 0) || (ferror(fp) != 0)){
     return EOF;
@@ -436,24 +436,33 @@ int run(char command) {
   return 0;
 } /* run() */
 
+
+/*
+ * Main function: contains interpreter loop and file argument handling
+ */
+
 int main(int argc, char **argv) {
 
+  // Start the pointer at index 0 of memory
   ptr = mem;
 
+  // If no filename argument was passed, throw error
   if (argc < 2) {
     printf("\n\nError: Specify a Brainfuck file to interpret.\n\n");
     return -1;
   }
 
+  // If the given file does not exist or cannot be opened, throw error
   fp = fopen(argv[1], "r");
   if (!fp) {
     printf("\n\nError: Brainfuck file '%s' not found.\n\n", argv[1]);
     return -1;
   }
 
-
+  // Run while EOF is not reached and run() doesn't throw error (Returns EOF for error)
   while (run(fgetc(fp)) != EOF){continue;}
 
+  // Close file
   fclose(fp);
   fp = NULL;
 
