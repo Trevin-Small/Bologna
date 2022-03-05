@@ -41,6 +41,17 @@
 | ```"comments"```      |Comment (By default text is ignored, but comments ignore commands)|
 |                       |      |
 
+# Bologna Paradigm
+**The name "Bologna" was chosen because this language is similar to the food; that is, somewhat gross, and probably not your first choice.**
+The language is very rudimentary, and was made as a joke to see what could be acheived with a *very* simple language.
+#### Basics
+- Bologna does not have conventional variables. All values are stored at some index in the 30,000 signed 8-bit integer array
+- These values can be accessed by shifting the pointer to the desired index, or accesing an index with ```#x```
+- Bologna has no functions
+- Bologna has no data types. Everything is stored as an _int_8t (This is somewhat obvious, as no variables or functions -> no data types)
+- Code is ran sequentially top to bottom, left to right
+- Bologna is interpreted from your file *directly at runtime*
+- Bologna is so dumb its cool
 
 # Command Explanations
 
