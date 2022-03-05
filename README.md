@@ -35,9 +35,9 @@ That is, somewhat gross, and probably not your first choice.
 | **Memory Indexing**   |      |
 | ```#```               |Get the value of the pointer's byte      |
 | ```#x```              |Get value of the byte at index  ```x```      |
-| **Query**             |     |
+| **Query Operator**    |     |
 | ```?(x<y){}```        |If the ```(boolean statement)``` is true, run the code inside the ```{}``` braces     |
-| **Logical Operators** |      |
+| *Logical Operators*     |  Note: Can only be used inside of the '( )' of a Query    |
 | ```>```               |Greater than  |
 | ```<```               |Less than  |
 | ```=```               |Equal to |
@@ -127,9 +127,51 @@ EX: #1 = mem[1] = some_value
 {}#3 (For loop repeats #3 times)
 ```
 
+# QUERY OPERATOR
+
+## Query
+```?(){}``` The query operator evaluates the expression inside of the parentheses, and only executes the code inside of the braces **if** the expression evaluates to true.
+```brainfuck
+CODE
+====================================
+
+"Set mem[0] to 65 (ASCII A)"
+:0 +65
+
+"Set mem[1] to 10"
+:1 +10
+
+"Set mem[2] to 10"
+:2 +10
+
+
+"If ('10'='10')then{.}"
+?(#1=#2){.}
+
+EXPECTED OUTPUT
+====================================
+A
+```
+## Logical operators
+- ```<``` Less than operator
+- ```>``` Greater than operator
+- ```=``` Equal to operator
+- ```!`` Not equal operator
+
+```brainfuck
+?(10<11){+} "This is true, the '+' will be executed"
+
+?(10>11){+} "This is false, the '+' will not be executed"
+
+?(10=11){+} "This is false, the '+' will not be executed"
+
+?(10!11){+} "This is true, the '+' will be executed"
+
+```
+
+
 # TODO
 - Add support for nested for loops (They currently dont work in the slightest LOL)
-- Add ```?{}``` Operator which checks if a value is greater than zero and runs the code inside the braces if so.
 - Create intermediary step before interpretation which optimizes the file for interpretation - removes all characters which are not commands.
 
 <br>
