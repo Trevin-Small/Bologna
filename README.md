@@ -40,8 +40,8 @@ That is, somewhat gross, and probably not your first choice.
 | **Logical Operators** |      |
 | ```>```               |  |
 | ```<```               |End program execution  |
-| ```==```              |End program execution  |
-| ```!=```              |End program execution  |
+| ```=```              |End program execution  |
+| ```!```              |End program execution  |
 |  **Other**            |      |
 | ```~```               |End program execution  |
 | ```"comments"```      |Comment (By default text is ignored, but comments ignore commands)|

@@ -7,6 +7,11 @@ int * ptr;
 FILE * fp;
 int is_comment = 0;
 
+
+void print_error() {
+  printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
+}
+
 /*
  * Reads arguments passed to commands that take them.
  *
@@ -75,7 +80,7 @@ int for_loop() {
   const long int final_position = ftell(fp);
 
   if (num_in != 1) {
-    printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
+    print_error();
     printf("Expected an integer after '}' for loop closing bracket. ( e.g. {}3 for 3 iterations)\n\n");
     return EOF;
   }
@@ -87,11 +92,11 @@ int for_loop() {
   do {
     fseek(fp, -2, SEEK_CUR);
     char char_in = fgetc(fp);
-    if (char_in == FOR_LOOP_END) {
+    if (char_in == BRACE_END) {
       close_counter++;
-    } else if ((char_in == FOR_LOOP_START) && (close_counter > 0)) {
+    } else if ((char_in == BRACE_START) && (close_counter > 0)) {
       close_counter--;
-    } else if ((char_in == FOR_LOOP_START) && (close_counter == 0)) {
+    } else if ((char_in == BRACE_START) && (close_counter == 0)) {
       break;
     }
   } while(1 == 1);
@@ -104,7 +109,7 @@ int for_loop() {
     do {
       run(next);
       next = fgetc(fp);
-    } while(next != FOR_LOOP_END);
+    } while(next != BRACE_END);
   }
 
   fseek(fp, final_position, SEEK_SET);
@@ -112,6 +117,100 @@ int for_loop() {
   return 0;
 } /* for_loop() */
 
+
+/*
+ * Query is Bologna's only logical command.
+ * Denoted "?( logical expression ){ code }"
+ *
+ * Code is only ran if the logical expression is true.
+ */
+
+int query() {
+
+  char logical_operator = fgetc(fp);
+
+  // Expect an opening parenthese after the logical expression
+  if (logical_operator == '(') {
+    int first_value = 0;
+
+    // Read the integer value of the first argument of the logical expression
+    if (read_args(&first_value) == 1) {
+
+      //Get logical operator (<, >, =, !)
+      logical_operator = fgetc(fp);
+
+      int second_value = 0;
+
+      // Read the integer value of the second argument of the logical expression
+      if ((read_args(&second_value) == 1) && (feof(fp) == 0)) {
+
+        // Integer that keeps track of whether the code inside the braces should be run later
+        int condition_met = 0;
+
+        switch(logical_operator) {
+          case LESS_THAN:
+            if(first_value < second_value){
+              condition_met = 1;
+            }
+            break;
+
+          case GREATER_THAN:
+            if (first_value > second_value) {
+              condition_met = 1;
+            }
+            break;
+
+          case EQUAL:
+            if (first_value == second_value) {
+              condition_met = 1;
+            }
+            break;
+
+          case NOT:
+            if (first_value != second_value) {
+              condition_met = 1;
+            }
+            break;
+        }
+
+        char char_in = '\0';
+
+        // Condition was met. Run code in between '{ }' braces
+        if (condition_met == 1) {
+
+          // Traverse to opening brace
+          do {
+            char_in = fgetc(fp);
+          } while ((feof(fp) == 0) && (char_in != BRACE_START));
+
+          char_in = fgetc(fp);
+
+          // Execute code inside of braces
+          do {
+            run(char_in);
+            char_in = fgetc(fp);
+          } while((feof(fp) == 0) && (char_in != BRACE_END));
+
+        // Condition was not met, traverse to closing brace '}' without running code inside
+        } else {
+
+          // Traverse to closing brace, skipping over execution of code in-between
+          do {
+            char_in = fgetc(fp);
+          } while((feof(fp) == 0) && (char_in != BRACE_END));
+
+        }
+
+        return 0;
+
+      }
+    }
+
+  }
+  print_error();
+  printf("Expected logical expression after '?' (Query) operator. Ex: ?(a < b){ }\n\n");
+  return EOF;
+} /* query() */
 
 
 /*
@@ -241,7 +340,7 @@ int run(char command) {
       if (read_args(&value) == 1) {
         ptr = mem + value;
       } else {
-        printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
+        print_error();
         printf("Expected integer value after ':' (Absolute shift) operator.\n\n");
         return EOF;
       }
@@ -252,7 +351,7 @@ int run(char command) {
       if (read_args(&value) == 1) {
         (*ptr)*= value;
       } else {
-        printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
+        print_error();
         printf("Expected integer value after '*' (multiplication) operator.\n\n");
         return EOF;
       }
@@ -262,7 +361,7 @@ int run(char command) {
       if (read_args(&value) == 1) {
         (*ptr)/= value;
       } else {
-        printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
+        print_error();
         printf("Expected integer value after '/' (integer division) operator.\n\n");
         return EOF;
       }
@@ -278,14 +377,17 @@ int run(char command) {
         }
       }
 
-      printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
+      print_error();
       printf("Using '#' (pointer value) operator is only permitted after commands that take integer arguments (e.g. +x, -x, <x, >x, *x, /x, {}x) OR with the '.' (CHAR_OUT) operator directly afterwards. (e.g. #. , #2.) \n\n");
       return EOF;
 
-    case FOR_LOOP_START:
+    case QUERY:
+      return query();
+
+    case BRACE_START:
       break;
 
-    case FOR_LOOP_END:
+    case BRACE_END:
       return for_loop();
       break;
 

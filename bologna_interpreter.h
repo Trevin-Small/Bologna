@@ -18,13 +18,19 @@
 #define MULTIPLY           '*'
 #define DIVIDE             '/'
 #define PTR_VALUE          '#'
-#define FOR_LOOP_START     '{'
-#define FOR_LOOP_END       '}'
+#define BRACE_START     '{'
+#define BRACE_END       '}'
 #define QUERY              '?'
 #define LOGIC_START        '('
 #define LOGIC_END          ')'
+#define LESS_THAN          '<'
+#define GREATER_THAN       '>'
+#define EQUAL              '='
+#define NOT                '!'
 #define EXIT               '~'
 
-int read_args(int*);
+void print_error();
+int read_args(int *value);
 int for_loop();
-int run(char);
+int query();
+int run(char command);
