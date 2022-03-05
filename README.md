@@ -35,7 +35,7 @@ That is, somewhat gross, and probably not your first choice.
 | **Memory Indexing**   |      |
 | ```#```               |Get the value of the pointer's byte      |
 | ```#x```              |Get value of the byte at index  ```x```      |
-| **Query** | NOTE: NOT YET IMPLEMENTED!     |
+| **Query**             |     |
 | ```?(x<y){}```        |If the ```(boolean statement)``` is true, run the code inside the ```{}``` braces     |
 | **Logical Operators** |      |
 | ```>```               |Greater than  |
