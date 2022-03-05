@@ -29,8 +29,13 @@
 | **Memory Indexing**   |      |
 | ```#```               |Get the value of the pointer's byte      |
 | ```#x```              |Get value of the byte at index  ```x```      |
+| **Query** | NOTE: NOT YET IMPLEMENTED!     |
+| ```?(x<y){}```        |If the ```(boolean statement)``` is true, run the code inside the ```{}``` braces     |
 | **Logical Operators** |      |
-| ```?x{}```            |Run code insides the braces if ```x``` is greater than zero      |
+| ```>```               |  |
+| ```<```               |End program execution  |
+| ```==```              |End program execution  |
+| ```!=```              |End program execution  |
 |  **Other**            |      |
 | ```~```               |End program execution  |
 | ```"comments"```      |Comment (By default text is ignored, but comments ignore commands)|
@@ -120,6 +125,7 @@ EX: #1 = mem[1] = some_value
 # TODO
 - Add support for nested for loops (They currently dont work in the slightest LOL)
 - Add ```?{}``` Operator which checks if a value is greater than zero and runs the code inside the braces if so.
+- Create intermediary step before interpretation which optimizes the file for interpretation - removes all characters which are not commands.
 
 <br>
 

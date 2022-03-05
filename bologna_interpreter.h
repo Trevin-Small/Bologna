@@ -20,6 +20,9 @@
 #define PTR_VALUE          '#'
 #define FOR_LOOP_START     '{'
 #define FOR_LOOP_END       '}'
+#define QUERY              '?'
+#define LOGIC_START        '('
+#define LOGIC_END          ')'
 #define EXIT               '~'
 
 int read_args(int*);
