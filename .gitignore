@@ -1,3 +1,6 @@
 .DS_Store
 *.plist
 bologna
+other_interpreters/interpreter.c
+other_interpreters/bf
+other_interpreters/vanilla_bf

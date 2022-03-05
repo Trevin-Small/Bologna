@@ -24,13 +24,14 @@ int is_comment = 0;
  */
 int read_args(int * value) {
 
-  char char_in = fgetc(fp);
+  int value_in = fgetc(fp);
+  int char_in = (char) value_in;
 
   if (char_in >= '0' && char_in <= '9') {
 
     fseek(fp, -1, SEEK_CUR);
     int num_in = fscanf(fp, "%d", value);
-    if (num_in == 1) {return 1;}
+    if (num_in == 1) {return 1;} else {return 0;}
 
   } else if (char_in == PTR_VALUE) {
 
@@ -46,7 +47,10 @@ int read_args(int * value) {
     return 1;
   }
 
-  fseek(fp, -1, SEEK_CUR);
+  if (value_in != EOF) {
+    fseek(fp, -1, SEEK_CUR);
+  }
+
   return 0;
 } /* read_args() */
 
@@ -119,7 +123,7 @@ int run(char command) {
 
   int value = 0;
 
-  if (is_comment == 1) {
+   if (is_comment == 1) {
     if (command == COMMENT) {
       is_comment = 0;
     }
@@ -288,10 +292,6 @@ int run(char command) {
     case EXIT:
     case EOF:
       return EOF;
-    default:
-      if ((feof(fp) > 0) || (ferror(fp) > 0)){
-        return EOF;
-      }
   }
 
   return 0;
@@ -312,7 +312,14 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  while (run(fgetc(fp)) != EOF){continue;}
+  int value_in = 0;
+  int char_in = '\0';
+
+  while (value_in != EOF){
+    value_in = fgetc(fp);
+    char_in = (char)value_in;
+    run(char_in);
+  }
 
   fclose(fp);
   fp = NULL;
