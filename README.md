@@ -4,10 +4,15 @@
 
 - Bologna is a derivative of the BrainFuck programming language, and retains the original 8 commands from BrainFuck (Those being: ```+-<>[],.```)
 
-## How does it compare to BrainFuck?
-- Like BrainFuck, Bologna uses a single 30,000 Byte array for the entirety of the program.
-- Memory is stored as signed 8-bit integers, unlike many implementations of BF which use unsigned characters.
-- Memory indexing, for loops, and rudimentary logic are a few of Bologna's features.
+# Bologna Paradigm
+**The name "Bologna" was chosen because this language is similar to the food; that is, somewhat gross, and probably not your first choice.**
+The language is very rudimentary, and was made as a joke to see what could be acheived with a *very* simple language.
+#### Basics
+- **No conventional variables.** All values are stored at some index in the 30,000 signed 8-bit integer array
+- **No functions**
+- **No data types**, as *everything* is stored as an _int_8t
+- **Interpreted** from your file *directly at runtime*
+- **So dumb its cool**
 
 # Cheat Sheet
 
@@ -40,18 +45,6 @@
 | ```~```               |End program execution  |
 | ```"comments"```      |Comment (By default text is ignored, but comments ignore commands)|
 |                       |      |
-
-# Bologna Paradigm
-**The name "Bologna" was chosen because this language is similar to the food; that is, somewhat gross, and probably not your first choice.**
-The language is very rudimentary, and was made as a joke to see what could be acheived with a *very* simple language.
-#### Basics
-- Bologna does not have conventional variables. All values are stored at some index in the 30,000 signed 8-bit integer array
-- These values can be accessed by shifting the pointer to the desired index, or accesing an index with ```#x```
-- Bologna has no functions
-- Bologna has no data types. Everything is stored as an _int_8t (This is somewhat obvious, as no variables or functions -> no data types)
-- Code is ran sequentially top to bottom, left to right
-- Bologna is interpreted from your file *directly at runtime*
-- Bologna is so dumb its cool
 
 # Command Explanations
 
