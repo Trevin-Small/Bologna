@@ -32,27 +32,42 @@ int read_args(int * value) {
   int value_in = fgetc(fp);
   int char_in = (char) value_in;
 
+  // If the argument is just an integer
   if (char_in >= '0' && char_in <= '9') {
 
+    // Seek back one character since we may have taken only one digit of a longer integer
     fseek(fp, -1, SEEK_CUR);
+
+    // Read in the argument integer
     int num_in = fscanf(fp, "%d", value);
+
+    // If argument was read in, return success
     if (num_in == 1) {return 1;} else {return 0;}
 
+  // If the argument was a memory index operator (#x)
   } else if (char_in == PTR_VALUE) {
 
+    // Number to store memory index
     int integer_in = 0;
+
+    // Read in the integer representing the memory index
     int num_in = fscanf(fp, "%d\n", &integer_in);
 
+    // If mem index was read in successfully
     if (num_in == 1) {
+      // Give the value to the value at the memory index
       *value = mem[integer_in];
     } else {
+      // Give the value of the current memory index
       *value = *ptr;
     }
 
     return 1;
   }
 
+  // If the character read in was neither (0-9) or '#x' and not at end of file
   if (value_in != EOF) {
+    // Seek back one (This character is the start of a new command)
     fseek(fp, -1, SEEK_CUR);
   }
 
@@ -72,23 +87,31 @@ int read_args(int * value) {
  */
 
 int for_loop() {
+
+  // Get the index of the end of the foor loop
   const long int for_end_index = ftell(fp);
 
   int num_repititions = 0;
+
+  // Read the argument 'x' passed to the for loop, i.e.'{}x'
   int num_in = read_args(&num_repititions);
 
+  // Get the index of the final position of the loop (after the argument)
   const long int final_position = ftell(fp);
 
+  // If no argument was given to the loop, throw an error
   if (num_in != 1) {
     print_error();
     printf("Expected an integer after '}' for loop closing bracket. ( e.g. {}3 for 3 iterations)\n\n");
     return EOF;
   }
 
+  // Seek to end of for loop
   fseek(fp, for_end_index, SEEK_SET);
 
   int close_counter = 0;
 
+  // Count the '}' and '{' braces while traversing to find the matching brace (in case of nested loops)
   do {
     fseek(fp, -2, SEEK_CUR);
     char char_in = fgetc(fp);
@@ -101,10 +124,16 @@ int for_loop() {
     }
   } while(1 == 1);
 
+  // Get the index of the start of the for loop
   long int for_start_index = ftell(fp);
 
+  // Repeat as many times as number of repetitions (specified by argument)
   for(int i = 1; i < num_repititions; i++) {
+
+    // Seek to beginning of loop on each execution
     fseek(fp, for_start_index, SEEK_SET);
+
+    // Run code inside of for loop
     char next = fgetc(fp);
     do {
       run(next);
@@ -112,6 +141,7 @@ int for_loop() {
     } while(next != BRACE_END);
   }
 
+  // Seek past the end of the for loop, including past the numerical argument at the end.
   fseek(fp, final_position, SEEK_SET);
 
   return 0;
@@ -147,6 +177,7 @@ int query() {
         // Integer that keeps track of whether the code inside the braces should be run later
         int condition_met = 0;
 
+        // Switch on the logical operator to use correct associated logic
         switch(logical_operator) {
           case LESS_THAN:
             if(first_value < second_value){
