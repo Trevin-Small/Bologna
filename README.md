@@ -47,42 +47,45 @@
 <<<<< == <5
 ```
 
-# Pointer Movement
+# POINTER MANIPULATION
+Initially, the program pointer points to the beginning of the memory array at index 0.
+## Left Shift
+```<x``` Shifts the pointer to the left ```x``` number of times.
 
-## LEFT SHIFT
+## Right Shift
+```>x``` Shifts the pointer to the right ```x``` number of times
 
-## RIGHT SHIFT
-
-# ABSOLUTE SHIFT
+## Absolute Shift
+```:x``` Shifts the pointer to memory index ```x```, regardless of its current position.
 
 # Numerical Operators
 
-## ZERO
+## Zero
 ```_``` Sets the value of the current pointer to zero
 
-## ABSOLUTE SHIFT
-```:x``` Shifts the pointer to index ```x```.
-
-## MULTIPLICATION
+## Multiplication
 ```*x``` Multiplies current pointer value by ```x```
 
-## DIVISION
+## Division
 ```/x``` Divides the current pointer value by ```x```
 
-# Loops
+# LOOPS
 
-## FOR LOOP
+## "While" Loop
+```[ ]``` BrainFuck's original loop implementation.
+
+## For Loop
 ```{}x``` Repeats code inside the indices ```x``` times, or ```{}#5``` repeats as many times as the value at memory index 5.
 Note that nested loops are not yet supported.
 
 # MEMORY INDEXING
 
-## CURRENT INDEX OPERATOR
+## Current Byte Operator
 ```#``` Gets value of current pointer (will be treated as if an integer was in the code)
 ```{}#``` A for loop that repeats as many times as the value of the current pointer
 ```+#``` Adds current pointer value to the current pointer value
 
-## MEMORY INDEX OPERATOR
+## Byte at Index Operator
 ```#x``` Every case from above applies, but rather than referencing the current pointer, it references pointer at memory index ```x```
 ```brainfuck
 Memory is an array of signed 8-bit integers
@@ -122,12 +125,39 @@ EX: #1 = mem[1] = some_value
 
 # If anyone is interested in playing around with this language:
 
-#### The interpreter for BrainFuck Extended is titled ```bf_extended.c```. You will need to download this file.
+####  Compile the interpreter file with:  
+```
+gcc -o bologna bologna_interpreter.c
+```
 
-####  Compile this file with: ```gcc -o brainfuck bf_extended.c```
-
-#### And run a BrainFuck file with ```./brainfuck your_brainfuck_file.bf```
+#### And run a Bologna file with  
+```
+./bologna your_file.bf
+```
 
 # Examples
-- Inside of the ```/bologna``` folder, there are ```.bf (brainfuck)``` files.
--
+- Inside of the ```/bologna_files``` folder, there are ```.bf (brainfuck)``` files.
+
+### Hello World Example
+```
+hello_world.bf
+```
+### Counter Example
+An example of a for loop that stores ascending values in memory  
+```
+counter_example.bf
+```
+```brainfuck
+MEMORY VALUES PRE EXECUTION:
+[0][0][0][0][0][0][0][0][0][0]
+
+>{ :10 + :#10 +#10 +48 .}9
+
+:0 +10 . _
+
+MEMORY VALUES POST EXECUTION:
+[0][1][2][3][4][5][6][7][8][9]
+
+PROGRAM OUTPUT:
+123456789\n
+```
