@@ -5,8 +5,9 @@
 - Bologna is a derivative of the BrainFuck programming language, and retains the original 8 commands from BrainFuck (Those being: ```+-<>[],.```)
 
 # Bologna Paradigm
-**The name "Bologna" was chosen because this language is similar to the food; that is, somewhat gross, and probably not your first choice.**
-The language is very rudimentary, and was made as a joke to see what could be acheived with a *very* simple language.
+### The name "Bologna" was chosen because this language is similar to the food;
+That is, somewhat gross, and probably not your first choice.
+- Bologna was made to see what could be acheived with a *very* simple language.
 #### Basics
 - **No conventional variables.** All values are stored at some index in the 30,000 signed 8-bit integer array
 - **No functions**
