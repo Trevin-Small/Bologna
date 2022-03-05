@@ -17,18 +17,19 @@
 | ```<x```              |Shift pointer left ```x``` times   |
 | ```:x```              |Move pointer to memory index ```x```  |
 | **Value Operations**  |      |
-| ```_```               |Set the pointer's value to zero  |
-| ```+x```              |Add ```x``` to the pointer's value   |
-| ```-x```              |Subtract ```x``` from the pointer's value   |
-| ```*x```              |Multiplty the pointer's value by ```x```   |
-| ```/x```              |Divide the pointers value by ```x```   |
+| ```_```               |Set the byte at the pointer to zero  |
+| ```+x```              |Add ```x``` to the byte at the pointer value   |
+| ```-x```              |Subtract ```x``` from the byte at the pointer  |
+| ```*x```              |Multiplty the byte at the pointer by ```x```   |
+| ```/x```              |Divide the byte at the pointer by ```x```   |
 | **Loops**             |      |
-| ```[ ]```             |      |
+| ```[```               |If the byte at the pointer is zero, jump past matching ```]```      |
+| ```]```               |If the byte at the pointer is non-zero, jump back to command after matching ```]``` |
 | ```{ }x```            |Repeat code inside the braces ```x``` times   |
 | **Memory Indexing**   |      |
-| ```#```               |Get current value of pointer ```x```      |
-| ```#x```              |Get value at memory index ```x```      |
-| **Logical Operators** |      | 
+| ```#```               |Get the value of the pointer's byte      |
+| ```#x```              |Get value of the byte at index  ```x```      |
+| **Logical Operators** |      |
 | ```?x{}```            |Run code insides the braces if ```x``` is greater than zero      |
 |  **Other**            |      |
 | ```~```               |End program execution  |
@@ -72,6 +73,7 @@
 
 ## FOR LOOP
 ```{}x``` Repeats code inside the indices ```x``` times, or ```{}#5``` repeats as many times as the value at memory index 5.
+Note that nested loops are not yet supported.
 
 # MEMORY INDEXING
 
