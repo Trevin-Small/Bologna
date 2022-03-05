@@ -42,7 +42,7 @@ That is, somewhat gross, and probably not your first choice.
 | ```<```               |Less than  |
 | ```=```               |Equal to |
 | ```!```               |Not equal to  |
-|  **Other OPERATORS**            |      |
+|  **Other Operators**            |      |
 | ```~```               |End program execution  |
 | ```"comments"```      |Comment (By default text is ignored, but comments ignore commands)<br> Ex: "+-.<>" will not execute any of the operators)|
 |                       |      |
