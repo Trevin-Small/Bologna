@@ -1,5 +1,5 @@
-![Bologna Logo](https://github.com/Trevin-Small/Bologna/blob/main/images/bologna.png)  
-**Bologna is an esoteric interpreted programming language**
+![Bologna Logo](https://github.com/Trevin-Small/Bologna/blob/main/images/bologna.png)
+## Bologna is an esoteric interpreted programming language
 - Intended to be minimalistic yet (somewhat?) useable, Bologna is an un-intuitive, ridiculous language.
 
 - Bologna is a derivative of the BrainFuck programming language, and retains the original 8 commands from BrainFuck (Those being: ```+-<>[],.```)
@@ -11,28 +11,29 @@
 
 # Cheat Sheet
 
-| Pointer Movement |      |      |
-|------------------|------|------|
-| ```>x```               |      |      |
-| ```<x```               |      |      |
-| ```:x```            |      |      |
-| **Value Operations** |      |      |
-| ```_```               |      |      |
-| ```+x```               |      |      |
-| ```-x```               |      |      |
-| ```*x```               |      |      |
-| ```/x```               |      |      |
-| **Loops**            |      |      |
-| ```[ ]```              |      |      |
-| ```{ }x```             |      |      |
-| **Memory Indexing**  |      |      |
-| ```#x```               |      |      |
-|                  |      |      |
-|                  |      |      |
-|  **Other**                |      |      |
-|   ```~```           |      |      |
-|   ```"```           |      |      |
-|            |      |      |
+| Pointer Movement      |      |
+|-----------------------|------|
+| ```>x```              |Shift pointer right ```x``` times   |
+| ```<x```              |Shift pointer left ```x``` times   |
+| ```:x```              |Move pointer to memory index ```x```  |
+| **Value Operations**  |      |
+| ```_```               |Set the pointer's value to zero  |
+| ```+x```              |Add ```x``` to the pointer's value   |
+| ```-x```              |Subtract ```x``` from the pointer's value   |
+| ```*x```              |Multiplty the pointer's value by ```x```   |
+| ```/x```              |Divide the pointers value by ```x```   |
+| **Loops**             |      |
+| ```[ ]```             |      |
+| ```{ }x```            |Repeat code inside the braces ```x``` times   |
+| **Memory Indexing**   |      |
+| ```#```               |Get current value of pointer ```x```      |
+| ```#x```              |Get value at memory index ```x```      |
+| **Logical Operators** |      | 
+| ```?x{}```            |Run code insides the braces if ```x``` is greater than zero      |
+|  **Other**            |      |
+| ```~```               |End program execution  |
+| ```"comments"```      |Comment (By default text is ignored, but comments ignore commands)|
+|                       |      |
 
 
 # Command Explanations
@@ -62,7 +63,7 @@
 ```:x``` Shifts the pointer to index ```x```.
 
 ## MULTIPLICATION
-```*x``` Multiplies current pointer value by ```x``` 
+```*x``` Multiplies current pointer value by ```x```
 
 ## DIVISION
 ```/x``` Divides the current pointer value by ```x```
@@ -126,5 +127,5 @@ EX: #1 = mem[1] = some_value
 #### And run a BrainFuck file with ```./brainfuck your_brainfuck_file.bf```
 
 # Examples
-- Inside of the ```/bologna``` folder, there are ```.bf (brainfuck)``` files. 
-- 
+- Inside of the ```/bologna``` folder, there are ```.bf (brainfuck)``` files.
+-
