@@ -1,17 +1,46 @@
+/* BOLOGNA LANGUAGE INTERPRETER
+ * =============================
+ *
+ * Bologna is an esoteric, interpreted language
+ * made to see what is possible with a minimilastic
+ * programming paradigm.
+ *
+ * OSS under the MIT License.
+ */
+
+/*----------------------------------------------------------------*/
+
 #include <stdio.h>
 #include <stdint.h>
 
 #include "bologna_interpreter.h"
 
+/*----------------------------------------------------------------*/
+
+// Memory array
 uint8_t mem[MEM_SIZE] = { 0 };
+
+// Main memory pointer (the one that gets moved/read)
 uint8_t * ptr;
+
+// File pointer
 FILE * fp;
+
+// Marker to indicate whether parsing a comment or commands
 int is_comment = 0;
 
 
+
+/*
+ * Line printed for every error regardless of type.
+ * Displays the file pointer index along with error message.
+ */
+
 void print_error() {
   printf("\n\nSyntax Error:\n\nFile pointer index: %ld\n", ftell(fp));
-}
+} /* print_error() */
+
+
 
 /*
  * Reads arguments passed to commands that take them.
@@ -72,6 +101,7 @@ int read_args(int * value) {
 
   return 0;
 } /* read_args() */
+
 
 
 /*
@@ -145,6 +175,7 @@ int for_loop() {
 
   return 0;
 } /* for_loop() */
+
 
 
 /*
@@ -241,6 +272,7 @@ int query() {
   printf("Expected Query in the form of '?(a<b){}' - Check for extraneous whitespace or characters.\n\n");
   return EOF;
 } /* query() */
+
 
 
 /*
@@ -435,6 +467,7 @@ int run(char command) {
 
   return 0;
 } /* run() */
+
 
 
 /*
