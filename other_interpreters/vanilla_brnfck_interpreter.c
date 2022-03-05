@@ -77,7 +77,7 @@ int run() {
             break;
           }
         } while(1 == 1);
-          fseek(fp, -1, SEEK_CUR);
+        fseek(fp, -1, SEEK_CUR);
       }
       break;
     case EOF:
