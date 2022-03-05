@@ -30,7 +30,7 @@ That is, somewhat gross, and probably not your first choice.
 | ```/x```              |Divide the byte at the pointer by ```x```   |
 | **Loops**             |      |
 | ```[```               |If the byte at the pointer is zero, jump past matching ```]```      |
-| ```]```               |If the byte at the pointer is non-zero, jump back to command after matching ```]``` |
+| ```]```               |If the byte at the pointer is non-zero, jump back to command after matching ```[``` |
 | ```{ }x```            |Repeat code inside the braces ```x``` times   |
 | **Memory Indexing**   |      |
 | ```#```               |Get the value of the pointer's byte      |
@@ -44,7 +44,7 @@ That is, somewhat gross, and probably not your first choice.
 | ```!```               |Not equal to  |
 |  **Other**            |      |
 | ```~```               |End program execution  |
-| ```"comments"```      |Comment (By default text is ignored, but comments ignore commands)|
+| ```"comments"```      |Comment (By default text is ignored, but comments ignore commands)<br> Ex: "+-.<>" will not execute any of the operators)|
 |                       |      |
 
 # Command Explanations
@@ -159,7 +159,7 @@ A
 - ```<``` Less than operator
 - ```>``` Greater than operator
 - ```=``` Equal to operator
-- ```!`` Not equal operator
+- ```!``` Not equal operator
 
 ```brainfuck
 ?(10<11){+} "This is true, the '+' will be executed"
@@ -174,48 +174,59 @@ A
 
 
 # TODO
-- Add support for nested for loops (They currently dont work in the slightest LOL)
+- Add Nested for loop support ```{ { }y }x```  (They currently dont work at all...)
 - Create intermediary step before interpretation which optimizes the file for interpretation - removes all characters which are not commands.
+- Fix while loop ```[ ]``` bug - currently, while loops will fail to exit under certain conditions.
 
 <br>
 
-# If anyone is interested in playing around with this language:
-
-####  Compile the interpreter file with:  
+# Using Bologna:
+- First, clone the repo **OR** download the ```.c``` files in ```/src```
+####  Compile the Bologna interpreter with:
 ```
 gcc -o bologna bologna_interpreter.c
 ```
 
-#### And run a Bologna file with  
+#### And run a Bologna file with
 ```
 ./bologna your_file.bf
 ```
 
-# Examples
+# Bologna Example Code
 - Inside of the ```/bologna_files``` folder, there are ```.bf (brainfuck)``` files.
 
 ### Hello World Example
 ```
 hello_world.bf
 ```
+```brainfuck
++72._+69._+76._+76._+79._+32._+87._+79._+82._+76._+68._+10.
+
+"EXPECTED OUTPUT:
+==========================================================="
+HELLO WORLD
+```
 ### Counter Example
-An example of a for loop that stores ascending values in memory  
+An example of a for loop that counts from 0 to 9
 ```
 counter_example.bf
 ```
 ```brainfuck
-MEMORY VALUES PRE EXECUTION:
-[0][0][0][0][0][0][0][0][0][0]
+"Go to memory index 3, then add 10"
+:3 +10
 
->{ :10 + :#10 +#10 +48 .}9
+"Go to memory index 0, then add 48 (ASCII '0' character)"
+:0 +48
 
-:0 +10 . _
+"Print value and increment byte by one. Repeat '#3' times, which evaluates to 10 repitions."
+{.+}#3
 
-MEMORY VALUES POST EXECUTION:
-[0][1][2][3][4][5][6][7][8][9]
+"Zero the index, add 10 (ASCII linebreak), and print it out"
+_ +10 .
 
-PROGRAM OUTPUT:
-123456789\n
+"Expected Output:
+========================================================================================="
+0123456789
 ```
 
 ### Tic Tac Toe
@@ -224,9 +235,11 @@ PROGRAM OUTPUT:
 tic_tac_toe.bf
 ```
 ```brainfuck
+FULL TIC TAC TOE AVAILABLE IN /bologna_files
 
-EXAMPLE CODE:
-====================================================================================
+
+"EXAMPLE (PORTION) OF CODE: 
+===================================================================================="
 
 "Print: Pick a cell 1 - 9) "
 
@@ -240,8 +253,8 @@ EXAMPLE CODE:
 :#50 _ +#13 :0 #10.
 
 
-EXAMPLE OUPUT:
-====================================================================================
+"EXAMPLE OUPUT:
+===================================================================================="
 -------
 |X|O|X|
 -------

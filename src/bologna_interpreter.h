@@ -1,7 +1,7 @@
 // Memory size of Brainfuck programs
 #define MEM_SIZE 30000
 
-// Vanilla Brainfucks commands
+// Standard Brainfuck commands
 #define PTR_LEFT_SHIFT     '<'
 #define PTR_RIGHT_SHIFT    '>'
 #define INCREMENT          '+'
@@ -11,15 +11,15 @@
 #define BRN_FCK_LOOP_START '['
 #define BRN_FCK_LOOP_END   ']'
 
-// Extended commands
+// Bologna Commands
 #define COMMENT            '"'
 #define ZERO               '_'
 #define ABSOLUTE_SHIFT     ':'
 #define MULTIPLY           '*'
 #define DIVIDE             '/'
 #define PTR_VALUE          '#'
-#define BRACE_START     '{'
-#define BRACE_END       '}'
+#define BRACE_START        '{'
+#define BRACE_END          '}'
 #define QUERY              '?'
 #define LOGIC_START        '('
 #define LOGIC_END          ')'

@@ -1,9 +1,10 @@
 #include <stdio.h>
+#include <stdint.h>
 
 #include "bologna_interpreter.h"
 
-int mem[MEM_SIZE] = {0};
-int * ptr;
+uint8_t mem[MEM_SIZE] = { 0 };
+uint8_t * ptr;
 FILE * fp;
 int is_comment = 0;
 
@@ -29,8 +30,7 @@ void print_error() {
  */
 int read_args(int * value) {
 
-  int value_in = fgetc(fp);
-  int char_in = (char) value_in;
+  int char_in =  fgetc(fp);
 
   // If the argument is just an integer
   if (char_in >= '0' && char_in <= '9') {
@@ -63,10 +63,9 @@ int read_args(int * value) {
     }
 
     return 1;
-  }
 
   // If the character read in was neither (0-9) or '#x' and not at end of file
-  if (value_in != EOF) {
+  } else if (feof(fp) == 0) {
     // Seek back one (This character is the start of a new command)
     fseek(fp, -1, SEEK_CUR);
   }
@@ -239,7 +238,7 @@ int query() {
 
   }
   print_error();
-  printf("Expected logical expression after '?' (Query) operator. Ex: ?(a < b){ }\n\n");
+  printf("Expected Query in the form of '?(a<b){}' - Check for extraneous whitespace or characters.\n\n");
   return EOF;
 } /* query() */
 
@@ -250,6 +249,13 @@ int query() {
  */
 
 int run(char command) {
+
+  // REMOVE WHEN DONE DEBUGGING ------------------------------------------------------->
+  //printf("Run char in: %c\n", command);
+
+  if ((feof(fp) != 0) || (ferror(fp) != 0)){
+    return EOF;
+  }
 
   int value = 0;
 
@@ -311,7 +317,7 @@ int run(char command) {
       break;
 
     case CHAR_IN:
-      scanf(" %d", ptr);
+      scanf(" %hhd", ptr);
       break;
 
     case CHAR_OUT:
@@ -355,7 +361,6 @@ int run(char command) {
             break;
           }
         } while(1 == 1);
-        fseek(fp, -1, SEEK_CUR);
       }
       break;
 
@@ -414,6 +419,7 @@ int run(char command) {
 
     case QUERY:
       return query();
+      break;
 
     case BRACE_START:
       break;
@@ -445,14 +451,8 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  int value_in = 0;
-  int char_in = '\0';
 
-  while (value_in != EOF){
-    value_in = fgetc(fp);
-    char_in = (char)value_in;
-    run(char_in);
-  }
+  while (run(fgetc(fp)) != EOF){continue;}
 
   fclose(fp);
   fp = NULL;
