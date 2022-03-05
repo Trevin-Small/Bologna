@@ -38,10 +38,10 @@ That is, somewhat gross, and probably not your first choice.
 | **Query** | NOTE: NOT YET IMPLEMENTED!     |
 | ```?(x<y){}```        |If the ```(boolean statement)``` is true, run the code inside the ```{}``` braces     |
 | **Logical Operators** |      |
-| ```>```               |  |
-| ```<```               |End program execution  |
-| ```=```              |End program execution  |
-| ```!```              |End program execution  |
+| ```>```               |Greater than  |
+| ```<```               |Less than  |
+| ```=```               |Equal to |
+| ```!```               |Not equal to  |
 |  **Other**            |      |
 | ```~```               |End program execution  |
 | ```"comments"```      |Comment (By default text is ignored, but comments ignore commands)|
