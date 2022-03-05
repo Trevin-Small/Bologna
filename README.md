@@ -1,4 +1,4 @@
-# Bologna ![Bologna Logo](https://github.com/Trevin-Small/Bologna/blob/main/bologna.png)
+![Bologna Logo](https://github.com/Trevin-Small/Bologna/blob/main/bologna.png)  
 **Bologna is an esoteric interpreted programming language**
 - Intended to be minimalistic yet (somewhat?) useable, Bologna is an un-intuitive, ridiculous language.
 
