@@ -1,8 +1,8 @@
-![Bologna Logo](https://github.com/Trevin-Small/Bologna/blob/main/bologna.png)  
+![Bologna Logo](https://github.com/Trevin-Small/Bologna/blob/main/images/bologna.png)  
 **Bologna is an esoteric interpreted programming language**
 - Intended to be minimalistic yet (somewhat?) useable, Bologna is an un-intuitive, ridiculous language.
 
-- As a derivative of the BrainFuck programming language, it retains the original 8 commands from BrainFuck (```+-<>[],.```)
+- Bologna is a derivative of the BrainFuck programming language, and retains the original 8 commands from BrainFuck (Those being: ```+-<>[],.```)
 
 ## How does it compare to BrainFuck?
 - Like BrainFuck, Bologna uses a single 30,000 Byte array for the entirety of the program.
