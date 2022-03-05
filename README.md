@@ -128,9 +128,12 @@ EX: #1 = mem[1] = some_value
 ```
 
 # QUERY OPERATOR
-
 ## Query
 ```?(){}``` The query operator evaluates the expression inside of the parentheses, and only executes the code inside of the braces **if** the expression evaluates to true.
+- Note that whitespace inside of '()' or between '?, (), {}' is not allowed.
+- Example: ```?(a < b){+}``` is not permitted due to whitespace inside the logical expression
+- ```? (a<b) {+}``` is also not permitted due to whitespace between the ```? (``` and ```) {```
+
 ```brainfuck
 CODE
 ====================================
