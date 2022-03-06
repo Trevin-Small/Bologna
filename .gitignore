@@ -1,8 +1,8 @@
 .DS_Store
 *.plist
-bologna
-other_interpreters/interpreter.c
-other_interpreters/bf
-other_interpreters/vanilla_bf
-bologna_files/bf_hello.bf
 .vscode
+bologna
+other/bf
+other/vanilla_bf
+other/interpreter.c
+bologna_files/bf_hello.bf
