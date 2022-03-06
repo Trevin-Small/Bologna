@@ -28,6 +28,9 @@ That is, somewhat gross, and probably not your first choice.
 | ```-x```              |Subtract ```x``` from the byte at the pointer  |
 | ```*x```              |Multiplty the byte at the pointer by ```x```   |
 | ```/x```              |Integer division of the byte at the pointer by ```x```   |
+| **Input / Output**  |      |
+| ```,```               |Takes a character input and stores it in the byte at the pointer  |
+| ```.```               |Prints the character at the byte at the pointer |
 | **Loops**             |      |
 | ```[```               |If the byte at the pointer is zero, jump past matching ```]```      |
 | ```]```               |If the byte at the pointer is non-zero, jump back to command after matching ```[``` |
