@@ -25,14 +25,14 @@ CODE:
 ?(2!3){:2 _ +69.} "This statement is true. 'E' should be printed."
 
 
-"Go to index 5, add 12"
-:5 +12
+"Go to index 5, add 88"
+:5 +88
 
-"Go to index 6, add 13"
-:6 +13
+"Go to index 6, add 89"
+:6 +89
 
 "Compare index 5 with index 6. The expression is true, so F will be printed."
-?(#5<#6){:2 _ +70.}
+?(#5<#6){ ?(#5<#6){:2 _ +70.} }
 
 "Expected output:
 ==================================================================================================="

@@ -165,7 +165,9 @@ int for_loop() {
     // Run code inside of for loop
     char next = fgetc(fp);
     do {
-      run(next);
+      if (run(next) == EOF) {
+        return EOF;
+      }
       next = fgetc(fp);
     } while(next != BRACE_END);
   }
@@ -248,17 +250,31 @@ int query() {
 
           // Execute code inside of braces
           do {
-            run(char_in);
+            if(run(char_in) == EOF){
+              return EOF;
+            }
             char_in = fgetc(fp);
           } while((feof(fp) == 0) && (char_in != BRACE_END));
 
         // Condition was not met, traverse to closing brace '}' without running code inside
         } else {
 
+          int open_brace_counter = 0;
+
+          // Traverse to opening brace
+          do {
+            char_in = fgetc(fp);
+          } while ((feof(fp) == 0) && (char_in != BRACE_START));
+
           // Traverse to closing brace, skipping over execution of code in-between
           do {
             char_in = fgetc(fp);
-          } while((feof(fp) == 0) && (char_in != BRACE_END));
+            if (char_in == BRACE_START) {
+              open_brace_counter++;
+            } else if (char_in == BRACE_END) {
+              open_brace_counter--;
+            }
+          } while((feof(fp) == 0) && ((char_in != BRACE_END) || (open_brace_counter >= 0)));
 
         }
 
