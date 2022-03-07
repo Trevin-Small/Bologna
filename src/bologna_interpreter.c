@@ -241,10 +241,7 @@ int query() {
         // Condition was met. Run code in between '{ }' braces
         if (condition_met == 1) {
 
-          // Traverse to opening brace
-          do {
-            char_in = fgetc(fp);
-          } while ((feof(fp) == 0) && (char_in != BRACE_START));
+          fseek(fp, 2, SEEK_CUR);
 
           char_in = fgetc(fp);
 
@@ -261,10 +258,7 @@ int query() {
 
           int open_brace_counter = 0;
 
-          // Traverse to opening brace
-          do {
-            char_in = fgetc(fp);
-          } while ((feof(fp) == 0) && (char_in != BRACE_START));
+          fseek(fp, 2, SEEK_CUR);
 
           // Traverse to closing brace, skipping over execution of code in-between
           do {
