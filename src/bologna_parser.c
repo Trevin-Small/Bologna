@@ -14,7 +14,7 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "bologna_interpreter.h"
+#include "bologna.h"
 
 /*----------------------------------------------------------------*/
 

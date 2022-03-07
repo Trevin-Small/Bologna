@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <stdint.h>
 
-#include "bologna_interpreter.h"
+#include "bologna.h"
 
 /*----------------------------------------------------------------*/
 
