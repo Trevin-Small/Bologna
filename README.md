@@ -4,7 +4,7 @@
 
 - Bologna is a derivative of the BrainFuck programming language, and retains the original 8 commands from BrainFuck (Those being: ```+-<>[],.```)
 
-# Bologna Paradigm
+# About Bologna
 ### The name "Bologna" was chosen because this language is similar to the food;
 That is, somewhat gross, and probably not your first choice.
 - Bologna was made to see what could be acheived with a *very* simple language.
@@ -14,6 +14,14 @@ That is, somewhat gross, and probably not your first choice.
 - **No data types**, as __*everything*__ is stored as an unsigned 8 bit integer
 - **Interpreted** *directly* from your file at runtime
 - __**So dumb its cool**__
+
+
+# Using Bologna:
+1. [Download the latest Bologna release here](https://github.com/Trevin-Small/Bologna/releases)
+2. In the same directory where you downloaded Bologna, run
+```
+bash bologna.bash my_bologna_file.bf
+```
 
 # Cheat Sheet
 
@@ -54,43 +62,57 @@ That is, somewhat gross, and probably not your first choice.
 
 # POINTER MANIPULATION
 Initially, the program pointer points to the beginning of the memory array at index 0.
-## Left Shift
+### Left Shift
 ```<x``` Shifts the pointer to the left ```x``` number of times.
 
-## Right Shift
+### Right Shift
 ```>x``` Shifts the pointer to the right ```x``` number of times
 
-## Absolute Shift
+### Absolute Shift
 ```:x``` Shifts the pointer to memory index ```x```, regardless of its current position.
+
+# Input / Output
+
+### Input
+```,``` Takes a single character input through ```stdin``` and stores it in the byte at the pointer
+
+### Output
+```.x``` Prints the character at the pointer's byte ```x``` times.
+
+**Special Case**
+
+```#x.``` Prints out the character value of the byte at memory index ```x```.
+- See memory indexing for more information on this topic.
+
 
 # Numerical Operations
 
-## Zero
+### Zero
 ```_``` Sets the value of the current pointer to zero
 
-## Multiplication
+### Multiplication
 ```*x``` Multiplies current pointer value by ```x```
 
-## Division
+### Division
 ```/x``` Divides the current pointer value by ```x```. Note that all division is integer division.
 
 # LOOPS
 
-## "While" Loop
+### "While" Loop
 ```[ ]``` BrainFuck's original loop implementation.
 
-## For Loop
+### For Loop
 ```{}x``` Repeats code inside the indices ```x``` times, or ```{}#5``` repeats as many times as the value at memory index 5.
 Note that nested loops are not yet supported.
 
 # MEMORY INDEXING
 
-## Current Byte Operator
+### Current Byte Operator
 ```#``` Gets value of current pointer (will be treated as if an integer was in the code)
 ```{}#``` A for loop that repeats as many times as the value of the current pointer
 ```+#``` Adds current pointer value to the current pointer value
 
-## Byte at Index Operator
+### Byte at Index Operator
 ```#x``` Every case from above applies, but rather than referencing the current pointer, it references pointer at memory index ```x```
 ```brainfuck
 Memory is an array of signed 8-bit integers
@@ -123,7 +145,7 @@ EX: #1 = mem[1] = some_value
 ```
 
 # QUERY OPERATOR
-## Query
+### Query
 ```?(){}``` The query operator evaluates the expression inside of the parentheses, and only executes the code inside of the braces **if** the expression evaluates to true.
 - Note that whitespace inside of '()' or between '?, (), {}' is not allowed.
 - Example: ```?(a < b){+}``` is not permitted due to whitespace inside the logical expression
@@ -169,10 +191,10 @@ A
 
 # OTHER OPERATORS
 
-## Exit
+### Exit
 ```~``` Terminates program execution immediately.
 
-## Comments
+### Comments
 ```" "``` Ignores commands inside of quotes. 
 - By default, characters which are not operators are already ignored
 - Comments allow usage of operator characters without execution
@@ -183,25 +205,11 @@ A
 
 # TODO
 - Add Nested for loop support ```{ { }y }x```  (They currently dont work at all...)
-- Create intermediary step before interpretation which optimizes the file for interpretation - removes all characters which are not commands.
 - Fix while loop ```[ ]``` bug - currently, while loops will fail to exit under certain conditions.
 
 <br>
 
-# Using Bologna:
-- First, clone the repo **OR** download the ```.c``` files in ```/src```
-####  Compile the Bologna interpreter with:
-```
-gcc -o bologna bologna_interpreter.c
-```
-
-#### And run a Bologna file with
-```
-./bologna your_file.bf
-```
-
-# Bologna Example Code
-- Inside of the ```/bologna_files``` folder, there are ```.bf (brainfuck)``` files.
+# Bologna Examples
 
 ### Hello World Example
 ```
