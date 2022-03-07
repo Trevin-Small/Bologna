@@ -24,11 +24,11 @@
 
 /*----------------------------------------------------------------*/
 
-void close_files(FILE *fr, FILE *fw) {
-  fclose(fr);
-  fr = NULL;
-  fclose(fw);
-  fw = NULL;
+void close_files(FILE **fr, FILE **fw) {
+  fclose(*fr);
+  *fr = NULL;
+  fclose(*fw);
+  *fw = NULL;
 } /* close_files() */
 
 
@@ -171,7 +171,7 @@ int main(int argc, char **argv) {
 
   if (file_condense(fr, fw) == -1) {
     printf("\n\nError: Error condesing file '%s'.\n\n", argv[1]);
-    close_files(fr, fw);
+    close_files(&fr, &fw);
     return -1;
   }
 
