@@ -102,7 +102,7 @@ Initially, the program pointer points to the beginning of the memory array at in
 ```[ ]``` BrainFuck's original loop implementation.
 
 ### For Loop
-```{}x``` Repeats code inside the indices ```x``` times, or ```{}#5``` repeats as many times as the value at memory index 5.
+```{ }x``` Repeats code inside the indices ```x``` times, or ```{ }#5``` repeats as many times as the value at memory index 5.
 Note that nested loops are not yet supported.
 
 # MEMORY INDEXING

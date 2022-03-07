@@ -6,9 +6,9 @@ if [ ! -f ./bologna_interpreter ]; then
 gcc ./bologna_interpreter.c -o ./bologna_interpreter
 fi
 
-touch .temp_bologna
+touch .parsed_bologna
 
-./bologna_parser $1 .temp_bologna
-./bologna_interpreter .temp_bologna
+./bologna_parser $1 .parsed_bologna
+./bologna_interpreter .parsed_bologna
 
-rm .temp_bologna
+rm .parsed_bologna
