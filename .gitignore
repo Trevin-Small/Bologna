@@ -6,3 +6,4 @@ other/bf
 other/vanilla_bf
 other/interpreter.c
 bologna_files/bf_hello.bf
+src/parser
