@@ -1,4 +1,4 @@
-/* BOLOGNA LANGUAGE INTERPRETER
+/* BOLOGNA LANGUAGE PARSER
  * =============================
  *
  * Bologna is an esoteric, interpreted language
@@ -6,6 +6,12 @@
  * programming paradigm.
  *
  * OSS under the MIT License.
+ *
+ * Bologna Parser takes a Bologna file and reduces it
+ * to just its command characters, elimininating comments,
+ * whitespace, linebreaks, and any other extraneous characters.
+ *
+ * This improves interpreter performance of 'bologna_interpreter.c'.
  */
 
 /*----------------------------------------------------------------*/

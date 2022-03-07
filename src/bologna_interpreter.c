@@ -6,6 +6,9 @@
  * programming paradigm.
  *
  * OSS under the MIT License.
+ *
+ * The Bologna interpreter takes in a parsed Bologna file
+ * (from the Bologna Parser) and interprets it.
  */
 
 /*----------------------------------------------------------------*/
