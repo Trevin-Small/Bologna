@@ -2,7 +2,7 @@
 ## Bologna is an esoteric interpreted programming language
 - Intended to be minimalistic yet (somewhat?) useable, Bologna is an un-intuitive, ridiculous language.
 
-- Bologna is a derivative of the BrainFuck programming language, and retains the original 8 commands from BrainFuck (Those being: ```+-<>[],.```)
+- Bologna is a superset of the BrainFuck programming language, and therefore retains the original 8 commands from BrainFuck (```+-<>[],.```)
 
 # About Bologna
 ### The name "Bologna" was chosen because this language is similar to the food;
